@@ -27,8 +27,12 @@
             "tsConfig": "projects/yt-search-app/tsconfig.app.json",
             "aot": true,
             "assets": [
-              "projects/yt-search-app/src/favicon.ico",
-              "projects/yt-search-app/src/assets"
+              "projects/yt-search-app/src/assets",
+              {
+                "glob": "bootstrap-icons.svg",
+                "input": "./node_modules/bootstrap-icons/",
+                "output": "/assets"
+              }
             ],
             "styles": [
               "projects/yt-search-app/src/styles.scss"
