@@ -1,0 +1,22 @@
+<h1>YouTube Search App</h1>
+<button (click)="Login()">Login</button>
+
+<p *ngIf="User$ | async as User">
+    {{ User | json }}
+
+</p>
+
+<form (submit)="$event.preventDefault(); Search(search.value);">
+    <input type="search" #search>
+    <button type="submit">Search</button>
+</form>
+
+
+<ul>
+    <li *ngFor="let item of Items$ | async">
+        <span [innerHtml]="item.snippet?.title"></span><br />
+        <img [src]="item.snippet?.thumbnails?.medium?.url" />
+    </li>
+</ul>
+
+<router-outlet></router-outlet>

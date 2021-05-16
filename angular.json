@@ -1,7 +1,171 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "c35bebf3-809e-4775-aefb-15cb5e5e3834"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-  }
+    "yt-search-app": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/yt-search-app",
+      "sourceRoot": "projects/yt-search-app/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/yt-search-app",
+            "index": "projects/yt-search-app/src/index.html",
+            "main": "projects/yt-search-app/src/main.ts",
+            "polyfills": "projects/yt-search-app/src/polyfills.ts",
+            "tsConfig": "projects/yt-search-app/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/yt-search-app/src/favicon.ico",
+              "projects/yt-search-app/src/assets"
+            ],
+            "styles": [
+              "projects/yt-search-app/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/yt-search-app/src/environments/environment.ts",
+                  "with": "projects/yt-search-app/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "yt-search-app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "yt-search-app:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "yt-search-app:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/yt-search-app/src/test.ts",
+            "polyfills": "projects/yt-search-app/src/polyfills.ts",
+            "tsConfig": "projects/yt-search-app/tsconfig.spec.json",
+            "karmaConfig": "projects/yt-search-app/karma.conf.js",
+            "assets": [
+              "projects/yt-search-app/src/favicon.ico",
+              "projects/yt-search-app/src/assets"
+            ],
+            "styles": [
+              "projects/yt-search-app/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/yt-search-app/tsconfig.app.json",
+              "projects/yt-search-app/tsconfig.spec.json",
+              "projects/yt-search-app/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/yt-search-app/e2e/protractor.conf.js",
+            "devServerTarget": "yt-search-app:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "yt-search-app:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "gapi": {
+      "projectType": "library",
+      "root": "projects/gapi",
+      "sourceRoot": "projects/gapi/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/gapi/tsconfig.lib.json",
+            "project": "projects/gapi/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/gapi/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/gapi/src/test.ts",
+            "tsConfig": "projects/gapi/tsconfig.spec.json",
+            "karmaConfig": "projects/gapi/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/gapi/tsconfig.lib.json",
+              "projects/gapi/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "yt-search-app"
 }
